@@ -1,15 +1,15 @@
-import {useState} from 'react';
+import {useState} from "react";
 
 export interface UseReplicantOnceOptions {
 	bundle: string;
 }
 
-export const useReplicantOnce = <T>(
+export const useReplicantOnce = <T, U = T>(
 	replicantName: string,
-	initialValue: T,
+	initialValue: U,
 	options?: UseReplicantOnceOptions,
 ): T => {
-	const [state, setState] = useState(initialValue);
+	const [state, setState] = useState<T>(initialValue! as T);
 	if (options && options.bundle) {
 		nodecg.readReplicant<T>(replicantName, options.bundle, (value) => {
 			setState(value);

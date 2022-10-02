@@ -1,14 +1,23 @@
 {
 	"extends": "@hoishin/tsconfig",
 	"compilerOptions": {
-		"lib": ["esnext", "dom"],
-		"jsx": "react",
+		"lib": [
+			"esnext",
+			"dom"
+		],
+		"jsx": "react-jsx",
 		"declaration": true,
-		"moduleResolution": "node"
+		"moduleResolution": "node",
+		"target": "ESNext",
+		"skipLibCheck": true,
+		"types": [
+			"nodecg/types/browser",
+			"react",
+			"jest"
+		]
 	},
 	"include": [
 		"src/**/*.ts",
-		"src/**/*.tsx",
-		"node_modules/nodecg/types/browser.d.ts"
+		"src/**/*.tsx"
 	]
 }

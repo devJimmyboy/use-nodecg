@@ -64,31 +64,36 @@
 	"prettier": "@hoishin/prettierrc",
 	"dependencies": {
 		"lodash.clone": "^4.5.0",
-		"tslib": "^2.0.0"
+		"tslib": "^2.4.0"
+	},
+	"peerDependencies": {
+		"nodecg": ">=1.6.0",
+		"react": ">=16.13.0"
 	},
 	"devDependencies": {
-		"@hoishin/prettierrc": "2.1.1",
-		"@hoishin/tsconfig": "2.0.0",
-		"@types/jest": "25.1.3",
-		"@types/lodash.clone": "4.5.6",
-		"@types/node": "12.12.29",
-		"@types/react": "16.9.29",
-		"@types/react-dom": "16.9.5",
-		"del-cli": "3.0.0",
-		"eslint": "6.8.0",
-		"eslint-config-hoishin": "0.2.5",
-		"husky": "4.3.0",
-		"jest": "25.1.0",
-		"lint-staged": "10.5.1",
-		"nodecg": "1.6.0",
+		"@hoishin/prettierrc": "2.2.0",
+		"@hoishin/tsconfig": "2.1.0",
+		"@types/jest": "29.1.1",
+		"@types/lodash.clone": "4.5.7",
+		"@types/node": "18.7.23",
+		"@types/react": "18.0.21",
+		"@types/react-dom": "18.0.6",
+		"del-cli": "5.0.0",
+		"eslint": "8.24.0",
+		"eslint-config-hoishin": "0.4.2",
+		"husky": "8.0.1",
+		"jest": "29.1.2",
+		"jest-environment-jsdom": "^29.1.2",
+		"lint-staged": "13.0.3",
+		"nodecg": "1.9.0",
 		"npm-run-all": "4.1.5",
-		"prettier": "2.0.0",
-		"react": "16.13.0",
-		"react-dom": "16.13.0",
+		"prettier": "2.7.1",
+		"react": "18.2.0",
+		"react-dom": "18.2.0",
 		"react-testing-library": "7.0.1",
-		"sort-package-json": "1.46.1",
-		"standard-version": "^8.0.0",
-		"ts-jest": "26.0.0",
-		"typescript": "3.8.3"
+		"sort-package-json": "2.0.0",
+		"standard-version": "^9.5.0",
+		"ts-jest": "29.0.3",
+		"typescript": "4.8.4"
 	}
 }

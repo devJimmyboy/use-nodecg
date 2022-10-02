@@ -1,6 +1,6 @@
-import {useEffect, useState} from 'react';
-import clone from 'lodash.clone';
-import {ReplicantOptions} from 'nodecg/types/server';
+import {useEffect, useState, SetStateAction, Dispatch, useRef} from "react";
+import clone from "lodash.clone";
+import {ReplicantOptions} from "nodecg/types/browser";
 
 /**
  * Subscribe to a replicant, returns tuple of the replicant value and `setValue` function.
@@ -10,26 +10,23 @@ import {ReplicantOptions} from 'nodecg/types/server';
  * @param initialValue Initial value to pass to `useState` function
  * @param options Options object.  Currently supports the optional `namespace` option
  */
-export const useReplicant = <T, U>(
+export const useReplicant = <T, U = T>(
 	replicantName: string,
 	initialValue: U,
 	options?: ReplicantOptions<T> & {namespace?: string},
-): [T | U, (newValue: T) => void] => {
-	const [value, updateValue] = useState<T | U>(initialValue);
+): [T | U, Dispatch<SetStateAction<T>>] => {
+	const [value, updateValue] = useState<T>(initialValue! as T);
 
 	const replicantOptions = options && {
 		defaultValue: options.defaultValue,
 		persistent: options.persistent,
 		schemaPath: options.schemaPath,
 	};
-	const replicant =
+	const replicant = useRef(
 		options && options.namespace
-			? nodecg.Replicant(
-					replicantName,
-					options.namespace,
-					replicantOptions,
-			  )
-			: nodecg.Replicant(replicantName, replicantOptions);
+			? nodecg.Replicant(replicantName, options.namespace, replicantOptions)
+			: nodecg.Replicant(replicantName, replicantOptions),
+	);
 
 	const changeHandler = (newValue: T): void => {
 		updateValue((oldValue) => {
@@ -42,16 +39,11 @@ export const useReplicant = <T, U>(
 	};
 
 	useEffect(() => {
-		replicant.on('change', changeHandler);
+		replicant.current.on("change", changeHandler);
 		return () => {
-			replicant.removeListener('change', changeHandler);
+			replicant.current.removeListener("change", changeHandler);
 		};
-	}, [replicant]);
+	}, []);
 
-	return [
-		value,
-		(newValue) => {
-			replicant.value = newValue;
-		},
-	];
+	return [value, updateValue];
 };
